@@ -1,28 +1,16 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<div>
+<h1>Fetch Todos</h1>
+<div>Loading</div>
+<div>
+  <pre> {{ todos }}</pre>
+</div>   
+</div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup lang='ts'>
+import { useQuery } from 'vue-query'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+const { data: todos } = useQuery(['todos'], () => fetch('https://jsonplaceholder.typicode.com/todos').then(response => response.json()))
+
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
